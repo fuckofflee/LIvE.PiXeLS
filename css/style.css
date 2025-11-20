@@ -1,0 +1,136 @@
+/* --- FONTS --- */
+@font-face {
+  font-family: 'TitleFont';
+  src: url('../fonts/sf-pro-display/perfectcalligraphy/PerfectoCalligraphy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InfoFont';
+  src: url('../fonts/sf-pro-display/SFPRODISPLAYMEDIUM.OTF') format('truetype'); 
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
+  background-color: aliceblue;
+}
+
+
+.scroll-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto; 
+  overflow-y: hidden;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar { 
+  display: none; 
+}
+
+.content-strip {
+  position: relative;
+  width: 150vw; 
+  height: 100vh;
+}
+
+#info-box {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  background: aliceblue;
+  border: 1px solid #000;
+  padding: 20px;
+  width: 300px;
+  height: auto;
+  font-family: 'InfoFont', sans-serif;
+  font-size: 1rem;
+  color: black;
+}
+
+.pos-bottom-left  { bottom: 30px; left: 30px; }
+.pos-top-right    { top: 30px; right: 30px; }
+
+/* --- STYLES VIDEOS --- */
+.movable {
+  position: absolute;
+  object-fit: cover;
+  left: var(--x, 0);
+  top: var(--y, 0);
+  width: var(--w, 300px);
+  z-index: var(--z, 1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* EFFET POP SUR LE DEVANT */
+.pop-on-hover1:hover {
+  z-index: 9999 !important; 
+  transform: scale(4);   
+  transition: all 0.3s ease;
+}
+
+.pop-on-hover2:hover {
+  z-index: 9999 !important; 
+  transform: scale(4.3);   
+  transition: all 0.3s ease;
+}
+
+.pop-on-hover3:hover {
+  z-index: 9999 !important; 
+  transform: scale(1.5);   
+  transition: all 0.3s ease;
+}
+
+/* --- GROUP 1ERE VIDEO --- */
+.video-group {
+  position: absolute;
+  left: var(--x, 0);
+  top: var(--y, 0);
+  width: var(--w, 50vw);
+  z-index: var(--z, 10);
+  
+  container-type: inline-size;
+}
+
+.video-group video {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+/* TITRE PRINCIPAL */
+.main-title {
+  position: absolute;
+  top: 20px; 
+  left: 0;
+  width: 100%; 
+  
+  margin: 0;
+  padding: 0;
+  line-height: 0.8; 
+  
+  /* Couleur Texte */
+  color: aliceblue;
+  mix-blend-mode: normal; 
+  
+  /* Typo */
+  font-family: 'TitleFont', serif;
+  text-align: justify; 
+  text-align-last: justify; 
+  
+  /* Explication CQI
+     'cqi' = Container Query Inline-size (percentage of the parent width).
+     16cqi usually fits a medium-length word across the whole container.
+     Adjust this number (e.g. 14cqi or 18cqi) if the text is too big/small.
+  */
+  font-size: 11.3cqi; 
+  
+  pointer-events: none; 
+}

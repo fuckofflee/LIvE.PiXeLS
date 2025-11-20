@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0" />
+<title>P5js intro</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div id="info-box" class="pos-bottom-left">
+    <p id="info-content">Select a video...</p>
+  </div>
+
+  <main class="scroll-container">
+    
+    <div class="content-strip">
+      <image class="movable clickable pop-on-hover3" src="img/n.png" 
+        style="--x: 15vw; --y: 42vh; --w: 8vw; --z: 10;"
+        data-text="LIvE.PiXeLS est une série réduite d'expérimentations visuelles réalisées avec P5js. Plutôt que de rajouter des effets sur une image, l'idée était de créer à partir de ce qui constitue l'image elle-même : les pixels. Chaque expérimentation est différente dans son utilisation du pixel comme matière, allant de l'expérimentation la plus simple, vers un mapping d'image sur un objet 3D.">
+      </image>
+
+      <div class="video-group" style="--x: 25vw; --y: 25vh; --w: 50vw; --z: 20;">
+        <video class="hoverPlay clickable" autoplay muted loop src="videos/noisy.mp4" 
+               data-text="Bruit: déplacment de pixels à partir de coordonnées générés par un noise."></video>
+        
+        <h1 class="main-title">LIvE.PiXeLS</h1>
+      </div>
+
+      <video class="movable hoverPlay clickable pop-on-hover1" muted loop src="videos/ascii.mp4" 
+        style="--x: 85vw; --y: 30vh; --w: 10vw; --z: 10;"
+        data-text="ASCII : projection de caractères sur l'image en fonction de sa luminosité. Les plus gros caractères sont programmés pour se placer sur les parties les moins lumineuses de l'image. Animé grâce à un bruit.">
+      </video>
+
+      <video autoplay muted loop playsinline class="movable clickable" muted loop src="videos/pointmap.mp4" 
+        style="--x: 70vw; --y: 55vh; --w: 40vw; --z: 10;"
+        data-text="Pointmap: système interactif de mapping par points générés à partir de luminosité de l'image choisie.">
+      </video>
+
+      <video class="movable hoverPlay clickable pop-on-hover2" muted loop src="videos/ascii croix.mp4" 
+        style="--x: 120vw; --y: 70vh; --w: 10vw; --z: 15;"
+        data-text="ASCII 2 : variante de l'effet ASCII avec des croix de tailles et de largeurs différentes en fonction de la luminosité. Animé grâce à un bruit.">
+      </video>
+
+      <video autoplay muted loop playsinline class="movable clickable" muted loop src="videos/spheric.mp4" 
+        style="--x: 80vw; --y: -5vh; --w: 65vw; --z: 8;"
+        data-text="Sphère: projection de fragments d'images en croix sur les points carthésiens d'une sphère rotative.">
+      </video>
+
+    </div>
+  </main>
+
+<script>
+  const container = document.querySelector('.scroll-container');
+  
+  document.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      container.scrollLeft += e.deltaY;
+  }, { passive: false });
+
+
+  const videos = document.querySelectorAll('.hoverPlay');
+  videos.forEach((v) => {
+    v.addEventListener('mouseenter', async () => {
+      try { await v.play(); } catch(e) { /* ignore autoplay errors */ }
+    });
+    v.addEventListener('mouseleave', () => {
+      v.pause();
+    });
+  });
+
+
+  const infoBox = document.getElementById('info-box');
+  const infoContent = document.getElementById('info-content');
+  const clickables = document.querySelectorAll('.clickable');
+
+  clickables.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation(); 
+      const text = el.getAttribute('data-text');
+      infoContent.innerText = text;
+      infoBox.style.display = 'block';
+    });
+  });
+
+  document.addEventListener('click', () => {
+    infoBox.style.display = 'none';
+  });
+</script>
+</body>
+</html>
